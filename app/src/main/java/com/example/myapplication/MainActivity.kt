@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil3.compose.AsyncImage
 import com.example.myapplication.data.local.criarArquivoDeImagem
 import com.example.myapplication.data.local.obterUriParaArquivo
 import com.example.myapplication.ui.FotoViewModel
@@ -92,10 +93,15 @@ fun TelaFotos(modifier: Modifier = Modifier, vm: FotoViewModel = viewModel()) {
 
         LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             items(fotos, key = { it.id }) { foto ->
-                Card {
-                    Text(
-                        text = foto.uri,
-                        modifier = Modifier.padding(12.dp)
+                Card(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    AsyncImage(
+                        model = foto.uri,
+                        contentDescription = "Foto salva",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
                     )
                 }
             }
